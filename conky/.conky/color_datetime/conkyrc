@@ -1,0 +1,92 @@
+conky.config = {
+--#####################
+-- - Conky settings - #
+--#####################
+	update_interval = 1,
+	total_run_times = 0,
+	net_avg_samples = 1,
+	cpu_avg_samples = 1,
+
+	imlib_cache_size = 0,
+	double_buffer = true,
+	no_buffers = true,
+--####################
+-- - Text settings - #
+--####################
+	use_xft = true,
+	font = 'Dinreg:size=160',
+	override_utf8_locale = true,
+	text_buffer_size = 2048,
+	xftalpha = 0.9,
+
+--############################
+-- - Window specifications - #
+--############################
+	own_window_class = 'Conky',
+	own_window = true,
+	own_window_type = 'desktop',
+	own_window_transparent = true,
+	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+	own_window_argb_visual = true,
+	own_window_argb_value = 100,
+
+
+	alignment = 'top_left',
+	gap_x = 1650,
+	gap_y = 550,
+	
+--gap_x = 1625,
+--gap_y = 550,
+--minimum_size 290 280
+--minumum_height 200
+--minumum_width 300 
+
+
+
+	default_bar_width = 60, default_bar_height = 8,
+
+--########################
+-- - Graphics settings - #
+--########################
+	draw_shades = false,
+
+	default_color = '#0E87E4',--FF4B4C#BDB5A1
+	default_shade_color = '#1d1d1d',
+	color0 = 'B0E0E6',
+	color1 = 'ff1414',
+	color2 = 'ffffff',
+	color3 = '2877c5',
+	color4 = 'ffb006',
+	--'#C8C8C8' D6713C FF4B4C ff1414
+	--color0 8FBC8F ## DarkSeaGreen
+	--color1 778899 ## LightSlateGray
+	--color2 FFA07A ## LightSalmon
+	--color3 87CEFA ## LightSkyBlue
+	--color4 48D1CC ## MediumTurquoise
+	--color5 FFDEAD ## NavajoWhite
+	--color6 00BFFF ## DeepSkyBlue
+	--color7 B0E0E6 ## PowderBlue
+	--color8 FFD700 ## Gold
+	--color9 FFA07A ## LightSalmon
+
+
+--lua_load ~/.conky/conkybg.lua
+--lua_draw_hook_pre conky_draw_bg
+
+};
+
+-- + right, - left, voffset up, offset down
+
+conky.text = [[
+${voffset -100}${offset +10}${font Impact Label:size=13}${color0}${if_match ${time %H}<12}AM${else}${if_match ${time %H}>12}PM${endif}${endif} ${color}${font}
+${voffset -380}${offset +50}${font Hug Me Tight:size=90}${color1}${time %H}
+${color2}${font Hug Me Tight:size=90}${color2}${voffset -75}${offset +50}${time %M}
+${voffset -60}${offset +10}${font Matter Wild:style=Regular:size=45}${color3}${time %A}
+#${voffset -10}${offset +10}${font Matter Wild:style=Regular:size=45}${color3}${time %A}
+#${voffset +10}${font Hug Me Tight:size=30}${color4}${time %B }${font Uchrony Circle:style=Bold:size=20}${color4}${time %d}
+${voffset +5}${font Hug Me Tight:size=30}${color4}${time %B }${font Uchrony Circle:style=Bold:size=20}${color4}${time %d}
+
+# seconds
+#${voffset -100}${offset 140}${font White On Black:size=40}${color1}${time %S}
+
+]];
