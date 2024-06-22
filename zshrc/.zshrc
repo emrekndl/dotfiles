@@ -147,6 +147,13 @@ alias emulator='$ANDROID_SDK_ROOT/emulator/emulator'
 
 
 export CHROME_EXECUTABLE='/usr/bin/chromium'
+# set up fzf key binding...
+source <(fzf --zsh)
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
 
 # To add support for TTYs this line can be optionally added.
 #source ~/.cache/wal/colors-tty.sh
