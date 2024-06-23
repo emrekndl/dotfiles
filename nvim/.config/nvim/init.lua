@@ -98,6 +98,68 @@ vim.g.have_nerd_font = true
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+-- custom opts
+-- vim.opt.wrap = false
+-- tab indent 4
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+-- vim.opt.softtabstop = 4
+-- vim.opt.expandtab = true
+-- vim.opt.smartindent = true
+
+-- swapfile
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
+vim.opt.undofile = true
+
+-- search
+vim.opt.incsearch = true
+-- undotree
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+
+-- highlight move
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
+-- File Explore page
+vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+
+-- J cursor not move
+vim.keymap.set('n', 'J', 'mzJ`z')
+
+-- when half page jumping, cursor in middle
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
+-- when searching cursor stay in middle
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+
+-- highlight copy and highlight pasting values not save in buffer (multiple highlight pasting firt copying value)
+vim.keymap.set('x', '<leader>p', [["_dP]])
+
+-- clipboard register yank
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
+vim.keymap.set('n', '<leader>Y', [["+Y]])
+
+-- delete void register
+vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
+
+-- tmux new sessinozer for new project
+vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>')
+
+-- quick fix navigating
+vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz')
+vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz')
+vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
+vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
+
+-- substitute shortcut
+vim.keymap.set('n', '<leader>g', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- chmod +x file
+vim.keymap.set('n', '<leader>X', '<cmd>!chmod +x %<CR>', { silent = true })
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -117,10 +179,6 @@ vim.opt.showmode = false
 
 -- Enable break indent
 vim.opt.breakindent = true
-
--- tab indent 4
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
 
 -- Save undo history
 vim.opt.undofile = true
@@ -162,7 +220,7 @@ vim.opt.scrolloff = 10
 --  See `:help vim.keymap.set()`
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = true
+vim.opt.hlsearch = false
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
@@ -262,7 +320,7 @@ require('lazy').setup({
       },
       signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
       numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
-      linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
+      linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
       word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
     },
   },
