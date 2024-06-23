@@ -147,7 +147,7 @@ vim.keymap.set('n', '<leader>Y', [["+Y]])
 vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
 
 -- tmux new sessinozer for new project
-vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>')
+vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww ~/.local/bin/tmux-sessionizer<CR>')
 
 -- quick fix navigating
 vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz')
