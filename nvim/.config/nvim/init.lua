@@ -144,7 +144,7 @@ vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
 vim.keymap.set('n', '<leader>Y', [["+Y]])
 
 -- delete void register
-vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
+vim.keymap.set({ 'n', 'v' }, '<leader>v', [["_d]])
 
 -- tmux new sessinozer for new project
 vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww ~/.local/bin/tmux-sessionizer<CR>')

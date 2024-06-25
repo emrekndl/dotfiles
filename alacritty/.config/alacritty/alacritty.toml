@@ -509,6 +509,7 @@ program = "/usr/bin/zsh"
 [window]
 opacity = 0.8
 title = "Alacritty"
+decorations = "None"
 
 [window.class]
 general = "Alacritty"
