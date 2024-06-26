@@ -99,6 +99,10 @@ vim.g.have_nerd_font = true
 --  For more options, you can see `:help option-list`
 
 -- custom opts
+-- recursive find
+vim.opt.path:append '**'
+-- netrw tree view
+vim.g.netrw_liststyle = 3
 -- vim.opt.wrap = false
 -- tab indent 4
 vim.opt.shiftwidth = 4
@@ -734,6 +738,8 @@ require('lazy').setup({
     event = 'InsertEnter',
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
+      'hrsh7th/cmp-buffer', -- source for text in buffer
+      'hrsh7th/cmp-path', -- source for file system paths
       {
         'L3MON4D3/LuaSnip',
         build = (function()
@@ -749,15 +755,16 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
       },
       'saadparwaiz1/cmp_luasnip',
+      'onsails/lspkind.nvim',
 
       -- Adds other completion capabilities.
       --  nvim-cmp does not ship with all sources by default. They are split
@@ -769,6 +776,7 @@ require('lazy').setup({
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
+      local lspkind = require 'lspkind'
       luasnip.config.setup {}
 
       cmp.setup {
@@ -834,8 +842,8 @@ require('lazy').setup({
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
+          { name = 'buffer' },
           { name = 'path' },
-          { name = 'codeium' },
         },
       }
     end,
