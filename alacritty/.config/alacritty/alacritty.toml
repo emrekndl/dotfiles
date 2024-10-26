@@ -1,4 +1,4 @@
-import = ["/home/emre/.config/alacritty/color.toml"]
+general.import = ["/home/emre/.config/alacritty/color.toml"]
 
 [colors]
 draw_bold_text_with_bright_colors = true
@@ -502,7 +502,7 @@ mouse = "Middle"
 history = 10000
 multiplier = 3
 
-[shell]
+[terminal.shell]
 args = ["--login"]
 program = "/usr/bin/zsh"
 
@@ -518,3 +518,5 @@ instance = "Alacritty"
 [window.padding]
 x = 6
 y = 6
+
+[terminal]

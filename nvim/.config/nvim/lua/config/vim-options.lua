@@ -148,7 +148,7 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- terminal mod
-vim.keymap.set("n", "<leader>t", ":term<CR>", { desc = "Open Terminal" })
+-- vim.keymap.set("n", "<leader>tt", ":term<CR>", { desc = "Open Terminal" })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')

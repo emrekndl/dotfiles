@@ -107,6 +107,19 @@ return {
 			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 			--  - settings (table): Override the default settings passed when initializing the server.
 
+			local cwd = vim.fn.getcwd()
+
+			local python_version = function()
+				local venv_path = cwd .. "/.venv/bin/python"
+				if vim.fn.executable(venv_path) == 1 then
+					local version = vim.fn.system(venv_path .. " --version")
+					return version:match("Python%s+(%d+%.%d+)")
+				end
+				return "3.11"
+			end
+
+			local venv_site_packages = cwd .. "/.venv/lib/python" .. python_version() .. "/site-packages"
+
 			local servers = {
 				-- clangd = {},
 				gopls = {
@@ -150,6 +163,7 @@ return {
 								useLibraryCodeForTypes = true,
 								diagnosticMode = "workspace",
 								autoImportCompletions = true,
+								extraPaths = { venv_site_packages },
 							},
 						},
 					},
