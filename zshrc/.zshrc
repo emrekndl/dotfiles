@@ -194,3 +194,6 @@ PERL5LIB="/home/emre/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/emre/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/emre/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/emre/perl5"; export PERL_MM_OPT;
+
+# true color
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
