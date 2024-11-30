@@ -115,6 +115,7 @@ return {
 						packer = "Packer",
 						fzf = "FZF",
 						alpha = "Alpha",
+						netrw = "Netrw Explorer",
 					},
 
 					use_mode_colors = false,
