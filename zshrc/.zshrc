@@ -89,6 +89,7 @@ plugins=(
 	themes
 	virtualenv	
     poetry
+    z
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -197,3 +198,11 @@ PERL_MM_OPT="INSTALL_BASE=/home/emre/perl5"; export PERL_MM_OPT;
 
 # true color
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+# capslock remap to escape
+setxkbmap -option "caps:escape_shifted_capslock"
+
+
+#initialize Z (https://github.com/rupa/z) 
+. ~/z.sh 
+

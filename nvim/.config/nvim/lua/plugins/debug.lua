@@ -174,6 +174,26 @@ return {
 				end,
 				justMyCode = true,
 			},
+			{
+				type = "python",
+				request = "launch",
+				name = "FastAPI",
+				program = "${workspaceFolder}/main.py",
+				pythonPath = function()
+					local cwd = vim.fn.getcwd()
+					if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
+						return cwd .. "/venv/bin/python"
+					elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+						return cwd .. "/.venv/bin/python"
+					else
+						return "/usr/bin/python"
+					end
+				end,
+				-- program = "${workspaceFolder}/.venv/bin/uvicorn",
+				-- args = { "main:app", "--host", "0.0.0.0", "--port", "8000" },
+				-- pythonPath = "${workspaceFolder}/.venv/bin/python",
+				justMyCode = true,
+			},
 		}
 	end,
 }

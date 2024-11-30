@@ -5,7 +5,7 @@ vim.g.maplocalleader = " "
 -- nerdfont
 vim.g.have_nerd_font = true
 
--- tab indent 4
+-- tab space indent 4
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -14,12 +14,18 @@ vim.opt.shiftwidth = 4
 -- recursive find
 vim.opt.path:append("**")
 
+-- netrw --
 -- netrw tree view
 vim.g.netrw_liststyle = 3
 
 vim.g.netrw_browse_split = 0
 -- vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
+
+vim.g.netrw_keepdir = 0
+vim.g.netrw_localcopydircmd = "cp -r"
+vim.g.netrw_localrmdir = "rm -r"
+vim.g.netrw_localmkdir = "mkdir -p"
 
 -- swapfile
 vim.opt.swapfile = false
@@ -139,6 +145,19 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagn
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
+-- tabs page keymaps
+vim.keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new [T]ab" })
+vim.keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close [T]ab" })
+-- tab index with LualineBuffersJump! index
+vim.keymap.set("n", "gj", function()
+	local index = vim.fn.getcharstr()
+	local tab_index = tonumber(index)
+	if tab_index then
+		vim.cmd("LualineBuffersJump! " .. tab_index)
+	else
+		vim.notify("Invalid index: " .. index, vim.log.levels.ERROR)
+	end
+end, { desc = "Jump to [T]ab by index" })
 -- exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -151,10 +170,10 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 -- vim.keymap.set("n", "<leader>tt", ":term<CR>", { desc = "Open Terminal" })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 -- keybinds to make split navigation easier.
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
