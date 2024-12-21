@@ -54,9 +54,9 @@ return {
 		always_divide_middle = true,
 		globalstatus = false,
 		refresh = {
-			statusline = 1000,
-			tabline = 1000,
-			winbar = 1000,
+			statusline = 80,
+			tabline = 100,
+			winbar = 100,
 		},
 
 		sections = {
@@ -116,6 +116,7 @@ return {
 						fzf = "FZF",
 						alpha = "Alpha",
 						netrw = "Netrw Explorer",
+						oil = "Oil File Explorer",
 					},
 
 					use_mode_colors = false,

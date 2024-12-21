@@ -132,7 +132,6 @@ export PATH="~/.local/ActiveState/StateTool/release:$PATH"
 export PATH="~/.cache/activestate/bin:$PATH"
 # -- STOP ACTIVESTATE DEFAULT RUNTIME ENVIRONMENT
 #
-# Flutter
 export JAVA_HOME='/usr/lib/jvm/java-21-openjdk'
 # export JAVA_HOME='/usr/lib/jvm/java-8-openjdk'
 export PATH=$JAVA_HOME/bin:$PATH 

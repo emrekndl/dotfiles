@@ -96,8 +96,18 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- File Explore page
-vim.keymap.set("n", "<leader>pv", ":Ex<CR>", { desc = "Netrw File Explorer" })
+-- vim.keymap.set("n", "<leader>pv", ":Ex<CR>", { desc = "Netrw File Explorer" })
 -- vim.keymap.set('n', '<leader>pv', vim.cmd.Rex)
+-- Oil File Explore page
+-- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+vim.keymap.set("n", "<leader>pv", function()
+	local oil = require("oil")
+	if vim.bo.filetype == "oil" then
+		vim.cmd("bdelete")
+	else
+		oil.open()
+	end
+end, { desc = "Toggle Oil File Explorer" })
 
 -- J cursor not move
 vim.keymap.set("n", "J", "mzJ`z")
