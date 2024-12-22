@@ -14,6 +14,14 @@ return {
 				"permissions",
 				"size",
 				-- "mtime",
+				-- {
+				-- 	"custom_name",
+				-- 	function(entry)
+				-- 		local depth = entry.depth or 0
+				-- 		local indent = string.rep("  ", depth)
+				-- 		return indent .. entry.name
+				-- 	end,
+				-- },
 			},
 			view_options = {
 				show_hidden = true,

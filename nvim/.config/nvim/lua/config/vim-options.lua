@@ -15,6 +15,8 @@ vim.opt.shiftwidth = 4
 vim.opt.path:append("**")
 
 -- netrw --
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 -- netrw tree view
 vim.g.netrw_liststyle = 3
 
@@ -96,6 +98,7 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- File Explore page
+vim.keymap.set("n", "<leader>pp", ":Ex<CR>", { desc = "Netrw File Explorer" })
 -- vim.keymap.set("n", "<leader>pv", ":Ex<CR>", { desc = "Netrw File Explorer" })
 -- vim.keymap.set('n', '<leader>pv', vim.cmd.Rex)
 -- Oil File Explore page
@@ -134,10 +137,10 @@ vim.keymap.set({ "n", "v" }, "<leader>v", [["_d]])
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/bin/tmux-sessionizer<CR>")
 
 -- quick fix navigating
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz")
 
 -- substitute shortcut
 vim.keymap.set("n", "<leader>g", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -186,10 +189,10 @@ vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 -- keybinds to make split navigation easier.
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+-- vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+-- vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+-- vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+-- vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
