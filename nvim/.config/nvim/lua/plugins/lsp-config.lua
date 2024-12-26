@@ -168,6 +168,7 @@ return {
 								diagnosticMode = "workspace",
 								autoImportCompletions = true,
 								extraPaths = { venv_site_packages },
+                                disableOrganizeImports = true,
 							},
 						},
 					},
