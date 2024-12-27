@@ -88,7 +88,6 @@ plugins=(
 	python
 	themes
 	virtualenv	
-    poetry
     z
 )
 

@@ -16,12 +16,26 @@ return {
 		},
 		config = function()
 			require("telescope").setup({
+                defaults = {
+                    mappings = {
+                        n = {
+                            ["d"] = require("telescope.actions").delete_buffer,
+                        },
+                    },
+                },
 				pickers = {
 					find_files = {
+                        hidden = true,
+                        -- find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+                        -- find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*", "--sortr=modified" },
 						theme = "ivy",
-						hidden = true,
 					},
 				},
+                path_display = {
+                    filenmame_first = {
+                        reverse_directories = true,
+                    },
+                },
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
@@ -42,7 +56,14 @@ return {
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+			vim.keymap.set("n", "<leader><leader>", function()
+                builtin.buffers({
+                    sort_mru = true,
+                    sort_lastused = true,
+                    initial_mode = "normal",
+                })
+            end, { desc = "[ ] Find existing buffers" })
+			-- vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
 			vim.keymap.set("n", "<leader>/", function()
 				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
@@ -62,6 +83,7 @@ return {
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
 
+            -- multigrep for searching multiple patterns
 			require("config.multigrep").setup()
 		end,
 	},
