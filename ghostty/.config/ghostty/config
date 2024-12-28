@@ -1,0 +1,17 @@
+theme = GruvboxDarkHard
+
+font-family = MesloLGS NF
+font-size = 15.0
+
+cursor-style = block_hollow
+cursor-style-blink = true
+
+shell-integration = zsh
+
+background-opacity = 0.8
+
+window-decoration = false
+
+confirm-close-surface = false
+
+keybind = ctrl+alt+v=toggle_tab_overview
