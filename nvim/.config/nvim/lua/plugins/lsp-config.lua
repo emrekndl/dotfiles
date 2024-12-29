@@ -6,7 +6,19 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
-			{ "j-hui/fidget.nvim", opts = {} },
+			{
+				"j-hui/fidget.nvim",
+				config = function()
+					require("fidget").setup({
+						notification = {
+							window = {
+								winblend = 0,
+								-- border = "rounded",
+							},
+						},
+					})
+				end,
+			},
 
 			-- used for completion, annotations and signatures of Neovim apis
 			-- { "folke/neodev.nvim", opts = {} },
@@ -168,7 +180,7 @@ return {
 								diagnosticMode = "workspace",
 								autoImportCompletions = true,
 								extraPaths = { venv_site_packages },
-                                disableOrganizeImports = true,
+								disableOrganizeImports = true,
 							},
 						},
 					},
