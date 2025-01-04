@@ -10,6 +10,9 @@ return {
 				"j-hui/fidget.nvim",
 				config = function()
 					require("fidget").setup({
+						progress = { -- LSP
+							ignore = { "null-ls" },
+						},
 						notification = {
 							window = {
 								winblend = 0,
@@ -115,7 +118,8 @@ return {
 			})
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
+			-- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 			--  Add any additional override configuration in the following tables. Available keys are:
 			--  - cmd (table): Override the default command used to start the server
@@ -138,6 +142,120 @@ return {
 
 			local servers = {
 				-- clangd = {},
+				ts_ls = {
+					cmd = { "typescript-language-server", "--stdio" },
+					filetypes = {
+						"javascript",
+						"javascriptreact",
+						"javascript.jsx",
+						"typescript",
+						"typescriptreact",
+						"typescript.tsx",
+					},
+					root_dir = require("lspconfig/util").root_pattern(
+						"package.json",
+						"tsconfig.json",
+						"jsconfig.json",
+						".git"
+					),
+					single_file_support = true,
+					settings = {
+						capabilities = {
+							textDocument = {
+								completion = {
+									completionItem = {
+										snippetSupport = true,
+									},
+								},
+							},
+						},
+					},
+				},
+				tailwindcss = {
+					cmd = { "tailwindcss-language-server", "--stdio" },
+					filetypes = {
+						"aspnetcorerazor",
+						"astro",
+						"astro-markdown",
+						"blade",
+						"clojure",
+						"django-html",
+						"htmldjango",
+						"edge",
+						"eelixir",
+						"elixir",
+						"ejs",
+						"erb",
+						"eruby",
+						"gohtml",
+						"gohtmltmpl",
+						"haml",
+						"handlebars",
+						"hbs",
+						"html",
+						"htmlangular",
+						"html-eex",
+						"heex",
+						"jade",
+						"leaf",
+						"liquid",
+						"markdown",
+						"mdx",
+						"mustache",
+						"njk",
+						"nunjucks",
+						"php",
+						"razor",
+						"slim",
+						"twig",
+						"css",
+						"less",
+						"postcss",
+						"sass",
+						"scss",
+						"stylus",
+						"sugarss",
+						"javascript",
+						"javascriptreact",
+						"reason",
+						"rescript",
+						"typescript",
+						"typescriptreact",
+						"vue",
+						"svelte",
+						"templ",
+					},
+					root_dir = require("lspconfig/util").root_pattern(
+						"tailwind.config.js",
+						"tailwind.config.cjs",
+						"tailwind.config.ts",
+						"tailwind.config.coffee",
+						"tailwind.config.json",
+						"tailwind.config.yaml",
+						"tailwind.config.toml"
+					),
+					settings = {
+						tailwindCSS = {
+							classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+							includeLanguages = {
+								eelixir = "html-eex",
+								eruby = "erb",
+								htmlangular = "html",
+								templ = "html",
+							},
+							lint = {
+								cssConflict = "warning",
+								invalidApply = "error",
+								invalidConfigPath = "error",
+								invalidScreen = "error",
+								invalidTailwindDirective = "error",
+								invalidVariant = "error",
+								recommendedVariantOrder = "warning",
+							},
+							validate = true,
+						},
+					},
+				},
 				gopls = {
 					settings = {
 						gopls = {
@@ -223,8 +341,8 @@ return {
 				"pyright",
 				"gopls",
 				"ruff",
-				"mypy",
-				"black",
+				"ts_ls",
+				"tailwindcss",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

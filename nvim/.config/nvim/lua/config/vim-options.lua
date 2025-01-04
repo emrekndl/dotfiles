@@ -93,6 +93,12 @@ vim.opt.scrolloff = 10
 -- Custom Remaps --
 --
 
+-- execute the current buffer
+vim.keymap.set("n", "<leader>x", "<cmd>source %<CR>", { desc = "Source the current buffer" })
+-- vim.keymap.set("n", "<leader>lx", ":.lua<CR>", { desc = "Run the current line" })
+-- vim.keymap.set("v", "<leader>lx", ":lua<CR>", { desc = "Run the visual selected current lines" })
+
+
 -- highlight move
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")

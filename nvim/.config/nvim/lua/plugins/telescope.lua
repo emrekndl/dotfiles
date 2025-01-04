@@ -16,40 +16,59 @@ return {
 		},
 		config = function()
 			require("telescope").setup({
-                defaults = {
-                    mappings = {
-                        n = {
-                            ["d"] = require("telescope.actions").delete_buffer,
-                        },
-                    },
-                },
+				defaults = {
+					mappings = {
+						n = {
+							["d"] = require("telescope.actions").delete_buffer,
+						},
+					},
+				},
 				pickers = {
 					find_files = {
-                        hidden = true,
-                        -- find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-                        -- find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*", "--sortr=modified" },
+						hidden = true,
+						-- find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+						-- find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*", "--sortr=modified" },
 						theme = "ivy",
 					},
 				},
-                path_display = {
-                    filenmame_first = {
-                        reverse_directories = true,
-                    },
-                },
+				path_display = {
+					filenmame_first = {
+						reverse_directories = true,
+					},
+				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
 					},
+					-- ["frecency"] = {
+					--     auto_validate = false,
+					--     path_display = { "filename_first" },
+					-- },
 				},
 			})
 
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
+			pcall(require("telescope").load_extension, "frecency")
 
+            -- local telescope = require("telescope")
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+            vim.keymap.set("n", "<leader>sf", function()
+                local cwd = vim.fn.getcwd()
+                require("telescope").extensions.frecency.frecency(require("telescope.themes").get_ivy({
+                workspace = "CWD",
+                cwd = cwd,
+                prompt_title = "Search Files " .. cwd,}))
+            end, { desc = "[S]earch [F]iles" })
+			-- vim.keymap.set("n", "<leader>sf", function()
+			-- 	builtin.find_files({
+			-- 		frecency = true,
+			-- 		hidden = true,
+			-- 	})
+			-- end, { desc = "[S]earch [F]iles" })
+			-- vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 			-- vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
@@ -57,12 +76,13 @@ return {
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 			vim.keymap.set("n", "<leader><leader>", function()
-                builtin.buffers({
-                    sort_mru = true,
-                    sort_lastused = true,
-                    initial_mode = "normal",
-                })
-            end, { desc = "[ ] Find existing buffers" })
+				builtin.buffers({
+					sort_mru = true,
+					sort_lastused = true,
+					initial_mode = "normal",
+					frecency = true,
+				})
+			end, { desc = "[ ] Find existing buffers" })
 			-- vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
 			vim.keymap.set("n", "<leader>/", function()
@@ -83,8 +103,15 @@ return {
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
 
-            -- multigrep for searching multiple patterns
+			-- multigrep for searching multiple patterns
 			require("config.multigrep").setup()
+
+			vim.keymap.set("n", "<leader>ep", function()
+				require("telescope.builtin").find_files({
+					prompt_title = "Find Project File",
+					cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
+				})
+			end, { desc = "[E]dit [P]roject file" })
 		end,
 	},
 	{
@@ -98,6 +125,25 @@ return {
 				},
 			})
 			require("telescope").load_extension("ui-select")
+		end,
+	},
+	{
+		"nvim-telescope/telescope-frecency.nvim",
+		version = "*",
+		config = function()
+			require("telescope").setup({
+				extensions = {
+					frecency = {
+						auto_validate = false,
+						matcher = "fuzzy",
+						path_display = { "filename_first" },
+					},
+				},
+
+				auto_validate = true,
+				ignore_patterns = { "*/.git", "*/.git/*", "*/.DS_Store" },
+			})
+			require("telescope").load_extension("frecency")
 		end,
 	},
 }

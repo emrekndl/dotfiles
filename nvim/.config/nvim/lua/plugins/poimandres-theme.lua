@@ -5,7 +5,8 @@ return {
 	config = function()
 		require("poimandres").setup({
 			disable_background = true,
-			disable_float_background = false,
+			disable_float_background = true,
+			-- disable_float_background = false,
 			disable_italics = false,
 			highlight_groups = {
 				LspReferenceText = { bg = require("poimandres.palette").background1 },
