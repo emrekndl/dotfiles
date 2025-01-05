@@ -94,7 +94,7 @@ vim.opt.scrolloff = 10
 --
 
 -- execute the current buffer
-vim.keymap.set("n", "<leader>x", "<cmd>source %<CR>", { desc = "Source the current buffer" })
+vim.keymap.set("n", "<leader>xf", "<cmd>source %<CR>", { desc = "Source the current buffer" })
 -- vim.keymap.set("n", "<leader>lx", ":.lua<CR>", { desc = "Run the current line" })
 -- vim.keymap.set("v", "<leader>lx", ":lua<CR>", { desc = "Run the visual selected current lines" })
 
@@ -207,4 +207,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank()
 	end,
+})
+
+-- all float window add a border
+vim.api.nvim_create_autocmd("WinNew", {
+  callback = function()
+    local win_id = vim.api.nvim_get_current_win()
+    local config = vim.api.nvim_win_get_config(win_id)
+    if config.relative ~= "" then
+      vim.api.nvim_win_set_config(win_id, {
+        border = "rounded", -- Border: 'rounded', 'single', 'double', 'solid', 'shadow'
+      })
+    end
+  end,
 })

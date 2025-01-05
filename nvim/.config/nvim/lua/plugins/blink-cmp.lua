@@ -9,14 +9,13 @@ return {
 				end,
 			},
 			{ "L3MON4D3/LuaSnip", version = "v2.*" },
-			-- "giuxtaposition/blink-cmp-copilot",
 		},
+        -- optional = true,
 
 		version = "*",
 		opts = function(_, opts)
 			opts.sources = vim.tbl_deep_extend("force", opts.sources or {}, {
-				default = { "lsp", "path", "snippets", "buffer", "luasnip" },
-				-- default = { "lsp", "path", "snippets", "buffer", "copilot", "luasnip" },
+				default = { "lsp", "path", "snippets", "buffer", "luasnip"},
 				providers = {
 					lsp = {
 						name = "lsp",
@@ -64,15 +63,6 @@ return {
 						min_keyword_length = 4,
 						score_offset = 80, -- the higher the number, the higher the priority
 					},
-					-- copilot = {
-					-- 	name = "copilot",
-					-- 	enabled = true,
-					-- 	module = "blink-cmp-copilot",
-					-- 	-- kind = "Copilot",
-					-- 	min_keyword_length = 6,
-					-- 	score_offset = -100, -- the higher the number, the higher the priority
-					-- 	async = true,
-					-- },
 				},
 				cmdline = function()
 					local type = vim.fn.getcmdtype()
@@ -106,44 +96,10 @@ return {
 			}
 
 			opts.appearance = {
-				use_nvim_cmp_as_default = true,
+				use_nvim_cmp_as_default = false,
 				nerd_font_variant = "mono",
 				highlight_ns = vim.api.nvim_create_namespace("blink_cmp"),
-				-- kind_icons = {
-				-- 	Text = "󰉿",
-				-- 	Method = "󰊕",
-				-- 	Function = "󰊕",
-				-- 	Constructor = "󰒓",
-				--
-				-- 	Field = "󰜢",
-				-- 	Variable = "󰆦",
-				-- 	Property = "󰖷",
-				--
-				-- 	Class = "󱡠",
-				-- 	Interface = "󱡠",
-				-- 	Struct = "󱡠",
-				-- 	Module = "󰅩",
-				--
-				-- 	Unit = "󰪚",
-				-- 	Value = "󰦨",
-				-- 	Enum = "󰦨",
-				-- 	EnumMember = "󰦨",
-				--
-				-- 	Keyword = "󰻾",
-				-- 	Constant = "󰏿",
-				--
-				-- 	Snippet = "󱄽",
-				-- 	Color = "󰏘",
-				-- 	File = "󰈔",
-				-- 	Reference = "󰬲",
-				-- 	Folder = "󰉋",
-				-- 	Event = "󱐋",
-				-- 	Operator = "󰪚",
-				-- 	TypeParameter = "󰬛",
-				-- 	Copilot = "",
-				-- 	LSP = "LSP",
-				-- },
-			}
+		}
 
 			opts.completion = {
 				keyword = { range = "full" },
@@ -160,24 +116,12 @@ return {
 					winhighlight = "Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
 					-- nvim.cmp style menu
 					draw = {
-						-- columns = {
-						-- 	{ "label", "label_description", gap = 1 },
-						-- 	{ "kind_icon", "kind" },
-						-- },
+						columns = {
+							{ "label", "label_description", gap = 1 },
+							{ "kind_icon", "kind" },
+						},
 						treesitter = { "lsp" },
 						components = {
-							-- kind_icon = {
-							-- 	ellipsis = false,
-							-- 	text = function(ctx)
-							-- 		local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-							-- 		return kind_icon
-							-- 	end,
-							-- 	-- Optionally, you may also use the highlights from mini.icons
-							-- 	highlight = function(ctx)
-							-- 		local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
-							-- 		return hl
-							-- 	end,
-							-- },
 							label = {
 								width = { fill = true, max = 60 },
 								text = function(ctx)
@@ -225,7 +169,10 @@ return {
 						-- winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
 					},
 				},
-				ghost_text = { enabled = false },
+				ghost_text = {
+                    -- enabled = false
+                    enabled = vim.g.ai_cmp,
+                },
 			}
 
 			opts.signature = {
