@@ -10,12 +10,13 @@ return {
 			},
 			{ "L3MON4D3/LuaSnip", version = "v2.*" },
 		},
-        -- optional = true,
+		-- optional = true,
 
 		version = "*",
 		opts = function(_, opts)
 			opts.sources = vim.tbl_deep_extend("force", opts.sources or {}, {
-				default = { "lsp", "path", "snippets", "buffer", "luasnip"},
+				default = { "lsp", "path", "snippets", "buffer" },
+				-- default = { "lsp", "path", "snippets", "buffer", "luasnip"},
 				providers = {
 					lsp = {
 						name = "lsp",
@@ -25,15 +26,15 @@ return {
 						fallbacks = { "luasnip", "buffer" },
 						score_offset = 90, -- the higher the number, the higher the priority
 					},
-					luasnip = {
-						name = "luasnip",
-						enabled = true,
-						module = "blink.cmp.sources.luasnip",
-						min_keyword_length = 2,
-						fallbacks = { "snippets" },
-						score_offset = 85,
-						max_items = 8,
-					},
+					-- luasnip = {
+					-- 	name = "luasnip",
+					-- 	enabled = true,
+					-- 	module = "blink.cmp.sources.luasnip",
+					-- 	min_keyword_length = 2,
+					-- 	fallbacks = { "snippets" },
+					-- 	score_offset = 85,
+					-- 	max_items = 8,
+					-- },
 					path = {
 						name = "Path",
 						module = "blink.cmp.sources.path",
@@ -77,6 +78,8 @@ return {
 			})
 
 			opts.snippets = {
+				preset = "luasnip",
+				-- preset = "friendly",
 				expand = function(snippet)
 					require("luasnip").lsp_expand(snippet)
 				end,
@@ -99,7 +102,7 @@ return {
 				use_nvim_cmp_as_default = false,
 				nerd_font_variant = "mono",
 				highlight_ns = vim.api.nvim_create_namespace("blink_cmp"),
-		}
+			}
 
 			opts.completion = {
 				keyword = { range = "full" },
@@ -117,40 +120,63 @@ return {
 					-- nvim.cmp style menu
 					draw = {
 						columns = {
-							{ "label", "label_description", gap = 1 },
-							{ "kind_icon", "kind" },
+							{ "kind_icon" },
+							{ "label", gap = 1 },
+							-- { "label", "label_description", gap = 1 },
+							-- { "kind_icon", "kind" },
 						},
 						treesitter = { "lsp" },
 						components = {
 							label = {
 								width = { fill = true, max = 60 },
 								text = function(ctx)
-									local highlights_info =
-										require("colorful-menu").highlights(ctx.item, vim.bo.filetype)
+									local highlights_info = require("colorful-menu").blink_highlights(ctx)
 									if highlights_info ~= nil then
-										return highlights_info.text
+										-- Or you want to add more item to label
+										return highlights_info.label
 									else
 										return ctx.label
 									end
 								end,
 								highlight = function(ctx)
-									local highlights_info =
-										require("colorful-menu").highlights(ctx.item, vim.bo.filetype)
 									local highlights = {}
+									local highlights_info = require("colorful-menu").blink_highlights(ctx)
 									if highlights_info ~= nil then
-										for _, info in ipairs(highlights_info.highlights) do
-											table.insert(highlights, {
-												info.range[1],
-												info.range[2],
-												group = ctx.deprecated and "BlinkCmpLabelDeprecated" or info[1],
-											})
-										end
+										highlights = highlights_info.highlights
 									end
 									for _, idx in ipairs(ctx.label_matched_indices) do
 										table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
 									end
+									-- Do something else
 									return highlights
 								end,
+								-- text = function(ctx)
+								-- 	local highlights_info =
+								-- 		require("colorful-menu").highlights(ctx.item, vim.bo.filetype)
+								-- 	if highlights_info ~= nil then
+								-- 		return highlights_info.text
+								-- 	else
+								-- 		return ctx.label
+								-- 	end
+								-- end,
+								-- highlight = function(ctx)
+								-- 	local highlights_info =
+								-- 		require("colorful-menu").highlights(ctx.item, vim.bo.filetype)
+								-- 	local highlights = {}
+								-- 	if highlights_info ~= nil then
+								-- 		for _, info in ipairs(highlights_info.highlights) do
+								-- 			table.insert(highlights, {
+								-- 				info.range[1],
+								-- 				info.range[2],
+								-- 				group = ctx.deprecated and "BlinkCmpLabelDeprecated" or info[1],
+								-- 			})
+								-- 		end
+								-- 	end
+								-- 	for _, idx in ipairs(ctx.label_matched_indices) do
+								-- 		table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
+								-- 	end
+								-- 	return highlights
+								-- end,
 							},
 						},
 					},
@@ -170,9 +196,9 @@ return {
 					},
 				},
 				ghost_text = {
-                    -- enabled = false
-                    enabled = vim.g.ai_cmp,
-                },
+					-- enabled = false
+					enabled = vim.g.ai_cmp,
+				},
 			}
 
 			opts.signature = {

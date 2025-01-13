@@ -98,7 +98,6 @@ vim.keymap.set("n", "<leader>xf", "<cmd>source %<CR>", { desc = "Source the curr
 -- vim.keymap.set("n", "<leader>lx", ":.lua<CR>", { desc = "Run the current line" })
 -- vim.keymap.set("v", "<leader>lx", ":lua<CR>", { desc = "Run the visual selected current lines" })
 
-
 -- highlight move
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -211,13 +210,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- all float window add a border
 vim.api.nvim_create_autocmd("WinNew", {
-  callback = function()
-    local win_id = vim.api.nvim_get_current_win()
-    local config = vim.api.nvim_win_get_config(win_id)
-    if config.relative ~= "" then
-      vim.api.nvim_win_set_config(win_id, {
-        border = "rounded", -- Border: 'rounded', 'single', 'double', 'solid', 'shadow'
-      })
-    end
-  end,
+	callback = function()
+		local win_id = vim.api.nvim_get_current_win()
+		local config = vim.api.nvim_win_get_config(win_id)
+		if config.relative ~= "" then
+			vim.api.nvim_win_set_config(win_id, {
+				border = "rounded", -- Border: 'rounded', 'single', 'double', 'solid', 'shadow'
+			})
+		end
+	end,
 })
+
+-- disable virtual text for tiny-inline-diagnostic
+vim.diagnostic.config({ virtual_text = false })

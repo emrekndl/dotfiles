@@ -87,8 +87,13 @@ plugins=(
     zsh-syntax-highlighting
 	python
 	themes
-	virtualenv	
+	virtualenv
     z
+    celery
+    colored-man-pages
+    command-not-found
+    zsh-autosuggestions
+    you-should-use
 )
 
 source $ZSH/oh-my-zsh.sh
