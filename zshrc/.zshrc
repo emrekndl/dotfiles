@@ -97,7 +97,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -124,7 +124,6 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 pfetch
-source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -170,9 +169,9 @@ eval "$(navi widget zsh)"
 # ALIAS
 alias vim=nvim
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
 
 # go
 export GOPATH=$HOME/go
@@ -209,3 +208,8 @@ setxkbmap -option "caps:escape_shifted_capslock"
 #initialize Z (https://github.com/rupa/z) 
 . ~/z.sh 
 
+# export PATH="/home/emre/.pyenv/versions/3.11.0/bin:$PATH"
+#
+
+# uv python download
+UV_PYTHON_DOWNLOADS=never

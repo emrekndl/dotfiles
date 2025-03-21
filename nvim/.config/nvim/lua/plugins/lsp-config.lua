@@ -141,7 +141,31 @@ return {
 			local venv_site_packages = cwd .. "/.venv/lib/python" .. python_version() .. "/site-packages"
 
 			local servers = {
-				-- clangd = {},
+				clangd = {
+					cmd = { "clangd", "--background-index" },
+					filetypes = { "c", "cpp", "h", "cc", "objc", "objcpp" },
+					root_dir = require("lspconfig/util").root_pattern(
+						".clangd",
+						".clang-tidy",
+						".clang-format",
+						"compile_commands.json",
+						"compile_flags.txt",
+						"configure.ac",
+						".git"
+					),
+					single_file_support = true,
+					settings = {
+						capabilities = {
+							textDocument = {
+								completion = {
+									completionItem = {
+										snippetSupport = true,
+									},
+								},
+							},
+						},
+					},
+				},
 				ts_ls = {
 					cmd = { "typescript-language-server", "--stdio" },
 					filetypes = {
@@ -171,91 +195,17 @@ return {
 						},
 					},
 				},
-				tailwindcss = {
-					cmd = { "tailwindcss-language-server", "--stdio" },
-					filetypes = {
-						"aspnetcorerazor",
-						"astro",
-						"astro-markdown",
-						"blade",
-						"clojure",
-						"django-html",
-						"htmldjango",
-						"edge",
-						"eelixir",
-						"elixir",
-						"ejs",
-						"erb",
-						"eruby",
-						"gohtml",
-						"gohtmltmpl",
-						"haml",
-						"handlebars",
-						"hbs",
-						"html",
-						"htmlangular",
-						"html-eex",
-						"heex",
-						"jade",
-						"leaf",
-						"liquid",
-						"markdown",
-						"mdx",
-						"mustache",
-						"njk",
-						"nunjucks",
-						"php",
-						"razor",
-						"slim",
-						"twig",
-						"css",
-						"less",
-						"postcss",
-						"sass",
-						"scss",
-						"stylus",
-						"sugarss",
-						"javascript",
-						"javascriptreact",
-						"reason",
-						"rescript",
-						"typescript",
-						"typescriptreact",
-						"vue",
-						"svelte",
-						"templ",
-					},
-					root_dir = require("lspconfig/util").root_pattern(
-						"tailwind.config.js",
-						"tailwind.config.cjs",
-						"tailwind.config.ts",
-						"tailwind.config.coffee",
-						"tailwind.config.json",
-						"tailwind.config.yaml",
-						"tailwind.config.toml"
-					),
-					settings = {
-						tailwindCSS = {
-							classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
-							includeLanguages = {
-								eelixir = "html-eex",
-								eruby = "erb",
-								htmlangular = "html",
-								templ = "html",
-							},
-							lint = {
-								cssConflict = "warning",
-								invalidApply = "error",
-								invalidConfigPath = "error",
-								invalidScreen = "error",
-								invalidTailwindDirective = "error",
-								invalidVariant = "error",
-								recommendedVariantOrder = "warning",
-							},
-							validate = true,
-						},
-					},
-				},
+				-- tailwindcss = {
+				-- 	cmd = { "tailwindcss-language-server", "--stdio" },
+				-- 	filetypes = {
+				-- 	},
+				-- 	settings = {
+				-- 		tailwindCSS = {
+				-- 			classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+				-- 			validate = true,
+				-- 		},
+				-- 	},
+				-- },
 				gopls = {
 					settings = {
 						gopls = {

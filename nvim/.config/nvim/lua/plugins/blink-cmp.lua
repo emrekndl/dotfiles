@@ -65,7 +65,10 @@ return {
 						score_offset = 80, -- the higher the number, the higher the priority
 					},
 				},
-				cmdline = function()
+			})
+
+			opts.cmdline = {
+				sources = function()
 					local type = vim.fn.getcmdtype()
 					if type == "/" or type == "?" then
 						return { "buffer" }
@@ -75,7 +78,7 @@ return {
 					end
 					return {}
 				end,
-			})
+			}
 
 			opts.snippets = {
 				preset = "luasnip",
@@ -120,10 +123,10 @@ return {
 					-- nvim.cmp style menu
 					draw = {
 						columns = {
-							{ "kind_icon" },
-							{ "label", gap = 1 },
-							-- { "label", "label_description", gap = 1 },
-							-- { "kind_icon", "kind" },
+							-- { "label", gap = 1 },
+							-- { "kind_icon" },
+							{ "label", "label_description", gap = 1 },
+							{ "kind_icon", gap = 1, "kind" },
 						},
 						treesitter = { "lsp" },
 						components = {

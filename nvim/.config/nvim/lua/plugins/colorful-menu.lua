@@ -40,6 +40,5 @@ return {
 			-- Default 60.
 			max_width = 60,
 		})
-		-- for lsp_config or typescript-tools
 	end,
 }
