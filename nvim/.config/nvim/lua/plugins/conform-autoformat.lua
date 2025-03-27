@@ -30,10 +30,11 @@ return {
 			-- 	if require("conform").get_formatter_info("ruff", bufnr).available then
 			-- 		return { "ruff" }
 			-- 	else
-			-- 		return { "black", "isort" }
+			-- 		return { ruff"black", "isort" }
 			-- 	end
 			-- end,
-			python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
+			python = { "pylsp" },
+			-- python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 			go = { "gofmt" },
 			html = { "prettier" },
 			javascript = { { "prettier" } },

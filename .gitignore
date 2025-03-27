@@ -12,3 +12,4 @@ test.sh
 spell/
 lazy-lock.json
 
+ghostty/.config/ghostty/themes

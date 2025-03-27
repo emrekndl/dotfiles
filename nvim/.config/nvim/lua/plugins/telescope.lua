@@ -117,7 +117,7 @@ return {
 			-- multigrep for searching multiple patterns
 			require("config.multigrep").setup()
 
-			vim.keymap.set("n", "<leader>ep", function()
+			vim.keymap.set("n", "<leader>sp", function()
 				require("telescope.builtin").find_files({
 					prompt_title = "Find Project File",
 					cwd = vim.fs.joinpath("lazy", vim.fn.stdpath("data")),

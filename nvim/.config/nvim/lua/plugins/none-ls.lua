@@ -15,7 +15,7 @@ return {
 				require("none-ls.diagnostics.eslint_d"),
 				-- require("none-ls.diagnostics.gofmt"),
 				-- require("none-ls.diagnostics.golint"),
-				require("none-ls.diagnostics.ruff"),
+				-- require("none-ls.diagnostics.ruff"),
 				-- require("none-ls.code_actions.ruff"),
 				-- null_ls.builtins.diagnostics.gofmt,
 				-- null_ls.builtins.diagnostics.golint,

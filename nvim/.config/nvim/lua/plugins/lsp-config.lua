@@ -74,6 +74,15 @@ return {
 					-- or a suggestion from your LSP for this to activate.
 					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
+					-- local opts = { noremap = true, silent = true, buffer = bufnr }
+					-- vim.keymap.set("n", "<leader>rf", function()
+					-- 	local params = {
+					-- 		command = "ruff.applyAutofix",
+					-- 		arguments = { { uri = vim.uri_from_bufnr(bufnr), version = 0 } },
+					-- 	}
+					-- 	vim.lsp.buf.execute_command(params)
+					-- end, opts)
+
 					-- Opens a popup that displays documentation about the word under your cursor
 					--  See `:help K` for why this keymap.
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -116,6 +125,21 @@ return {
 					end
 				end,
 			})
+			-- Disable hover in favor of Pyright
+			-- vim.api.nvim_create_autocmd("LspAttach", {
+			-- 	group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
+			-- 	callback = function(args)
+			-- 		local client = vim.lsp.get_client_by_id(args.data.client_id)
+			-- 		if client == nil then
+			-- 			return
+			-- 		end
+			-- 		if client.name == "ruff" then
+			-- 			-- Disable hover in favor of Pyright
+			-- 			client.server_capabilities.hoverProvider = false
+			-- 		end
+			-- 	end,
+			-- 	desc = "LSP: Disable hover capability from Ruff",
+			-- })
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
@@ -239,32 +263,81 @@ return {
 						},
 					},
 				},
-				pyright = {
+				-- ruff = {
+				-- 	init_options = {
+				-- 		settings = {
+				-- 			logLevel = "debug",
+				-- 			organizeImports = true,
+				-- 		},
+				-- 	},
+				-- 	-- cmd = { "ruff", "server" },
+				-- 	-- filetypes = { "python" },
+				-- 	-- root_dir = require("lspconfig/util").root_pattern(".git"),
+				-- },
+				pylsp = {
 					settings = {
-						python = {
-							analysis = {
-								autoSearchPaths = true,
-								useLibraryCodeForTypes = true,
-								diagnosticMode = "workspace",
-								autoImportCompletions = true,
-								extraPaths = { venv_site_packages },
-								disableOrganizeImports = true,
-							},
-						},
-					},
-					capabilities = {
-						textDocument = {
-							completion = {
-								completionItem = {
-									snippetSupport = true,
-									resolveSupport = {
-										properties = { "documentation", "detail", "additionalTextEdits" },
-									},
+						pylsp = {
+							executable = "pylsp",
+							plugins = {
+								rope_autoimport = {
+									enabled = true,
+									extra_paths = { venv_site_packages },
+								},
+								ruff = {
+									enabled = true, -- Enable the plugin
+									formatEnabled = true, -- Enable formatting using ruffs formatter
+									executable = "ruff",
+									-- executable = "<path-to-ruff-bin>", -- Custom path to ruff
+									-- config = "<path_to_custom_ruff_toml>", -- Custom config for ruff to use
+									-- extendSelect = { "I" }, -- Rules that are additionally used by ruff
+									-- extendIgnore = { "C90" }, -- Rules that are additionally ignored by ruff
+									-- format = { "I" }, -- Rules that are marked as fixable by ruff that should be fixed when running textDocument/formatting
+									-- severities = { ["D212"] = "I" }, -- Optional table of rules where a custom severity is desired
+									unsafeFixes = false, -- Whether or not to offer unsafe fixes as code actions. Ignored with the "Fix All" action
+
+									-- Rules that are ignored when a pyproject.toml or ruff.toml is present:
+									lineLength = 88, -- Line length to pass to ruff checking and formatting
+									-- exclude = { "__about__.py" }, -- Files to be excluded by ruff checking
+									-- select = { "F" }, -- Rules to be enabled by ruff
+									-- ignore = { "D210" }, -- Rules to be ignored by ruff
+									perFileIgnores = { ["__init__.py"] = "CPY001" }, -- Rules that should be ignored for specific files
+									preview = false, -- Whether to enable the preview style linting and formatting.
+									targetVersion = "py310", -- The minimum python version to target (applies for both linting and formatting).
 								},
 							},
 						},
 					},
 				},
+				-- pyright = {
+				-- 	settings = {
+				-- 		disableOrganizeImports = true,
+				-- 		python = {
+				-- 			analysis = {
+				-- 				ignore = { "*" },
+				-- 			},
+				-- 			-- 	analysis = {
+				-- 			-- 		autoSearchPaths = true,
+				-- 			-- 		useLibraryCodeForTypes = true,
+				-- 			-- 		diagnosticMode = "workspace",
+				-- 			-- 		autoImportCompletions = true,
+				-- 			-- 		extraPaths = { venv_site_packages },
+				-- 			-- 		disableOrganizeImports = true,
+				-- 			-- 	},
+				-- 		},
+				-- 	},
+				-- capabilities = {
+				-- 	textDocument = {
+				-- 		completion = {
+				-- 			completionItem = {
+				-- 				snippetSupport = true,
+				-- 				resolveSupport = {
+				-- 					properties = { "documentation", "detail", "additionalTextEdits" },
+				-- 				},
+				-- 			},
+				-- 		},
+				-- 	},
+				-- },
+				-- },
 				-- rust_analyzer = {},
 				-- tsserver = {},
 
@@ -288,11 +361,10 @@ return {
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua",
-				"pyright",
+				-- "pyright",
 				"gopls",
-				"ruff",
 				"ts_ls",
-				"tailwindcss",
+				-- "tailwindcss",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
