@@ -125,21 +125,6 @@ return {
 					end
 				end,
 			})
-			-- Disable hover in favor of Pyright
-			-- vim.api.nvim_create_autocmd("LspAttach", {
-			-- 	group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
-			-- 	callback = function(args)
-			-- 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-			-- 		if client == nil then
-			-- 			return
-			-- 		end
-			-- 		if client.name == "ruff" then
-			-- 			-- Disable hover in favor of Pyright
-			-- 			client.server_capabilities.hoverProvider = false
-			-- 		end
-			-- 	end,
-			-- 	desc = "LSP: Disable hover capability from Ruff",
-			-- })
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
@@ -263,17 +248,6 @@ return {
 						},
 					},
 				},
-				-- ruff = {
-				-- 	init_options = {
-				-- 		settings = {
-				-- 			logLevel = "debug",
-				-- 			organizeImports = true,
-				-- 		},
-				-- 	},
-				-- 	-- cmd = { "ruff", "server" },
-				-- 	-- filetypes = { "python" },
-				-- 	-- root_dir = require("lspconfig/util").root_pattern(".git"),
-				-- },
 				pylsp = {
 					settings = {
 						pylsp = {
@@ -360,15 +334,17 @@ return {
 
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
-				"stylua",
+				-- "stylua",
 				-- "pyright",
-				"gopls",
-				"ts_ls",
+				-- "gopls",
+				-- "ts_ls",
 				-- "tailwindcss",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
+				ensure_installed = ensure_installed,
+				automatic_installation = false,
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}

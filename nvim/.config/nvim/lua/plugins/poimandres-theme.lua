@@ -12,6 +12,8 @@ return {
 				LspReferenceText = { bg = require("poimandres.palette").background1 },
 				LspReferenceRead = { bg = require("poimandres.palette").background1 },
 				LspReferenceWrite = { bg = require("poimandres.palette").background1 },
+				-- winbar background clear color
+				WinBar = { bg = require("poimandres.palette").none },
 			},
 		})
 

@@ -155,7 +155,9 @@ return {
 							return require("nvim-navic").is_available()
 							-- return navic.is_available()
 						end,
+						-- color_correction = "static",
 						color_correction = "dynamic",
+						-- color_correction = nil,
 					},
 				},
 				lualine_x = {},
