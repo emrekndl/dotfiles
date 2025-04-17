@@ -13,6 +13,10 @@ return {
 			},
 			{ "nvim-telescope/telescope-ui-select.nvim" },
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+			{
+				"nvim-telescope/telescope-live-grep-args.nvim",
+				version = "^1.0.0",
+			},
 		},
 		config = function()
 			require("telescope").setup({
@@ -40,6 +44,7 @@ return {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
 					},
+
 					-- fzf = {
 					-- 	fuzzy = true,
 					-- 	override_generic_sorter = true,
@@ -56,6 +61,7 @@ return {
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
 			pcall(require("telescope").load_extension, "frecency")
+			pcall(require("telescope").load_extension, "live_grep_args")
 
 			-- local telescope = require("telescope")
 			local builtin = require("telescope.builtin")
@@ -74,6 +80,9 @@ return {
 					hidden = true,
 				})
 			end, { desc = "[S]earch [F]iles" })
+			vim.keymap.set("n", "<leader>st", function()
+				builtin.git_files()
+			end, { desc = "[S]earch [T]racked files(git)" })
 			-- vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
@@ -114,15 +123,34 @@ return {
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "[S]earch [N]eovim files" })
 
-			-- multigrep for searching multiple patterns
-			require("config.multigrep").setup()
-
-			vim.keymap.set("n", "<leader>sp", function()
-				require("telescope.builtin").find_files({
-					prompt_title = "Find Project File",
-					cwd = vim.fs.joinpath("lazy", vim.fn.stdpath("data")),
+			-- multigrep for searching multiple patterns -t: type -g: directory(or regex"*.{c,h}"), --type-not: blacklist
+			-- vim.keymap.set("n", "<leader>sg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+			vim.keymap.set("n", "<leader>sg", function()
+				require("telescope").extensions.live_grep_args.live_grep_args({
+					prompt_title = "Search by [G]rep with args(-t, -g, --type-not)",
+					auto_quoting = true,
+					theme = "ivy",
+					mappings = {
+						i = {
+							["<C-k>"] = require("telescope-live-grep-args.actions").quote_prompt(),
+							["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({
+								postfix = " --iglob ",
+							}),
+							-- freeze the current list and start a fuzzy search in the frozen list
+							["<C-space>"] = require("telescope-live-grep-args.actions").to_fuzzy_refine,
+						},
+					},
+					layout_config = { mirror = true },
 				})
-			end, { desc = "[E]dit [P]roject file" })
+			end, { desc = "[S]earch by [G]rep with args" })
+			-- require("config.multigrep").setup()
+
+			-- vim.keymap.set("n", "<leader>sp", function()
+			-- 	require("telescope.builtin").find_files({
+			-- 		prompt_title = "Find Project File",
+			-- 		cwd = vim.fs.joinpath("lazy", vim.fn.stdpath("data")),
+			-- 	})
+			-- end, { desc = "[E]dit [P]roject file" })
 
 			-- vim.keymap.set("n", "<leader>sa", function()
 			-- 	require("telescope.builtin").find_files({

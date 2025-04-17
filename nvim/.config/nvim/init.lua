@@ -7,7 +7,7 @@ if vim.g.vscode then
 	-- autocmds
 	require("config.autocmds")
 	-- lazy-nvim
-	require("config.lazy")
+	-- require("config.lazy")
 else
 	-- ordinary Neovim
 	-- vim-options

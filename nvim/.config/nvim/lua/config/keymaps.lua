@@ -12,12 +12,12 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- File Explore page
-vim.keymap.set("n", "<leader>pp", ":Ex<CR>", { desc = "Netrw File Explorer" })
+-- vim.keymap.set("n", "<leader>pp", ":Ex<CR>", { desc = "Netrw File Explorer" })
 -- vim.keymap.set("n", "<leader>pv", ":Ex<CR>", { desc = "Netrw File Explorer" })
 -- vim.keymap.set('n', '<leader>pv', vim.cmd.Rex)
 -- Oil File Explore page
 -- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-vim.keymap.set("n", "<leader>pv", function()
+vim.keymap.set("n", "<leader>-", function()
 	local oil = require("oil")
 	if vim.bo.filetype == "oil" then
 		vim.cmd("bdelete")
@@ -37,7 +37,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- highlight copy and highlight pasting values not save in buffer (multiple highlight pasting firt copying value)
+-- highlight copy and highlight pasting values not save in buffer (multiple highlights pasting first copying value)
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- clipboard register yank
@@ -57,7 +57,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz")
 
 -- substitute shortcut
-vim.keymap.set("n", "<leader>g", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>ra", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- chmod +x file
 vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true })
@@ -107,3 +107,7 @@ vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 -- vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 -- vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 -- vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+--
+--
+-- undotree
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
