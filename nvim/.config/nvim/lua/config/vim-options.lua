@@ -91,3 +91,7 @@ vim.opt.scrolloff = 10
 
 -- disable virtual text for tiny-inline-diagnostic
 vim.diagnostic.config({ virtual_text = false })
+
+-- if the completion engine supports the AI source,
+-- use that instead of inline suggestions
+vim.g.ai_cmp = true

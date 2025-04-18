@@ -245,8 +245,8 @@ return {
 				},
 			},
 			ghost_text = {
-				enabled = true,
-				-- enabled = vim.g.ai_cmp,
+				-- enabled = true,
+				enabled = vim.g.ai_cmp,
 			},
 		}
 

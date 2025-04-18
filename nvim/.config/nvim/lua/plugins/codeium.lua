@@ -22,22 +22,23 @@ return {
 		event = "VeryLazy",
 		config = function()
 			local neocodeium = require("neocodeium")
-			local blink = require("blink.cmp")
+			-- local blink = require("blink.cmp")
 
 			neocodeium.setup({
 				show_label = false,
 				silent = true,
-				filter = function()
-					return not blink.is_visible()
-				end,
+				-- manual = true,
+				-- filter = function()
+				-- 	return not blink.is_visible()
+				-- end,
 			})
 
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "BlinkCmpMenuOpen",
-				callback = function()
-					neocodeium.clear()
-				end,
-			})
+			-- vim.api.nvim_create_autocmd("User", {
+			-- 	pattern = "BlinkCmpMenuOpen",
+			-- 	callback = function()
+			-- 		neocodeium.clear()
+			-- 	end,
+			-- })
 			vim.keymap.set("i", "<A-f>", neocodeium.accept)
 			vim.keymap.set("i", "<A-w>", function()
 				require("neocodeium").accept_word()
