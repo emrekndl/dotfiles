@@ -158,24 +158,6 @@ return {
 			-- 		cwd = "/",
 			-- 	})
 			-- end, { desc = "[S]earch [A]ll Files" })
-
-			-- vim.keymap.set("n", "<leader>sa", function()
-			-- 	require("telescope.builtin").find_files({
-			-- 		prompt_title = "Search Home Files by Name and Extension",
-			-- 		cwd = os.getenv("HOME"),
-			-- 		prompt = function(prompt)
-			-- 			local pieces = vim.split(prompt, "  ")
-			-- 			if pieces[2] then
-			-- 				return "*." .. pieces[2]
-			-- 			else
-			-- 				return ""
-			-- 			end
-			-- 		end,
-			-- 	})
-			-- end, { desc = "[S]earch [H]ome [F]iles" })
-
-			-- search files by name, extension, and location
-			-- require("config.searchfiles").setup()
 		end,
 	},
 	{

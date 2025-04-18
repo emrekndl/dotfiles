@@ -42,6 +42,7 @@ return {
 	opts = function(_, opts)
 		opts.sources = vim.tbl_deep_extend("force", opts.sources or {}, {
 			default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
+			-- default = { "lsp", "path", "snippets", "buffer", "ripgrep", "dadbod" },
 			-- default = { "lsp", "path", "snippets", "buffer", "luasnip"},
 			providers = {
 				lsp = {
@@ -102,6 +103,10 @@ return {
 						search_casing = "--smart-case",
 					},
 				},
+				-- dadbod = {
+				-- 	name = "Dadbod",
+				-- 	module = "vim_dadbod_completion.blink",
+				-- },
 			},
 		})
 
@@ -151,6 +156,9 @@ return {
 			-- 	selection = "auto_insert",
 			-- },
 			menu = {
+				-- auto_show = function(ctx)
+				-- 	return ctx.mode ~= "default"
+				-- end,
 				min_width = 25,
 				max_height = 10,
 				-- border = "single",
@@ -237,8 +245,8 @@ return {
 				},
 			},
 			ghost_text = {
-				-- enabled = false
-				enabled = vim.g.ai_cmp,
+				enabled = true,
+				-- enabled = vim.g.ai_cmp,
 			},
 		}
 
@@ -258,6 +266,4 @@ return {
 		return opts
 	end,
 	opts_extend = { "sources.default" },
-	-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" }),
-	-- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none", fg = "#ffffff" }),
 }

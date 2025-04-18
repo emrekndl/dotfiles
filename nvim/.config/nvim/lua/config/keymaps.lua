@@ -12,7 +12,6 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- File Explore page
--- vim.keymap.set("n", "<leader>pp", ":Ex<CR>", { desc = "Netrw File Explorer" })
 -- vim.keymap.set("n", "<leader>pv", ":Ex<CR>", { desc = "Netrw File Explorer" })
 -- vim.keymap.set('n', '<leader>pv', vim.cmd.Rex)
 -- Oil File Explore page

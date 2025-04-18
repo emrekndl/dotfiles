@@ -74,15 +74,6 @@ return {
 					-- or a suggestion from your LSP for this to activate.
 					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
-					-- local opts = { noremap = true, silent = true, buffer = bufnr }
-					-- vim.keymap.set("n", "<leader>rf", function()
-					-- 	local params = {
-					-- 		command = "ruff.applyAutofix",
-					-- 		arguments = { { uri = vim.uri_from_bufnr(bufnr), version = 0 } },
-					-- 	}
-					-- 	vim.lsp.buf.execute_command(params)
-					-- end, opts)
-
 					-- Opens a popup that displays documentation about the word under your cursor
 					--  See `:help K` for why this keymap.
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -149,27 +140,6 @@ return {
 
 			local venv_site_packages = cwd .. "/.venv/lib/python" .. python_version() .. "/site-packages"
 
-			-- odoo specific config !!! NOT WORKING
-			vim.tbl_deep_extend("keep", require("lspconfig"), {
-				odoo_ls = {
-					cmd = { "odoo-lsp", "--stdio" },
-					filetypes = { "xml", "py", "js" },
-					root_dir = require("lspconfig/util").root_pattern("odoo", ".git"),
-					single_file_support = true,
-					settings = {
-						capabilities = {
-							textDocument = {
-								completion = {
-									completionItem = {
-										snippetSupport = true,
-									},
-								},
-							},
-						},
-					},
-				},
-			})
-
 			local servers = {
 				clangd = {
 					cmd = { "clangd", "--background-index" },
@@ -196,35 +166,35 @@ return {
 						},
 					},
 				},
-				ts_ls = {
-					cmd = { "typescript-language-server", "--stdio" },
-					filetypes = {
-						"javascript",
-						"javascriptreact",
-						"javascript.jsx",
-						"typescript",
-						"typescriptreact",
-						"typescript.tsx",
-					},
-					root_dir = require("lspconfig/util").root_pattern(
-						"package.json",
-						"tsconfig.json",
-						"jsconfig.json",
-						".git"
-					),
-					single_file_support = true,
-					settings = {
-						capabilities = {
-							textDocument = {
-								completion = {
-									completionItem = {
-										snippetSupport = true,
-									},
-								},
-							},
-						},
-					},
-				},
+				-- ts_ls = {
+				-- 	cmd = { "typescript-language-server", "--stdio" },
+				-- 	filetypes = {
+				-- 		"javascript",
+				-- 		"javascriptreact",
+				-- 		"javascript.jsx",
+				-- 		"typescript",
+				-- 		"typescriptreact",
+				-- 		"typescript.tsx",
+				-- 	},
+				-- 	root_dir = require("lspconfig/util").root_pattern(
+				-- 		"package.json",
+				-- 		"tsconfig.json",
+				-- 		"jsconfig.json",
+				-- 		".git"
+				-- 	),
+				-- 	single_file_support = true,
+				-- 	settings = {
+				-- 		capabilities = {
+				-- 			textDocument = {
+				-- 				completion = {
+				-- 					completionItem = {
+				-- 						snippetSupport = true,
+				-- 					},
+				-- 				},
+				-- 			},
+				-- 		},
+				-- 	},
+				-- },
 				-- tailwindcss = {
 				-- 	cmd = { "tailwindcss-language-server", "--stdio" },
 				-- 	filetypes = {
