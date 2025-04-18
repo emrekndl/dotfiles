@@ -15,4 +15,5 @@ window-decoration = false
 confirm-close-surface = false
 
 keybind = ctrl+alt+v=toggle_tab_overview
+keybind = ctrl+four=increase_font_size:1
 
