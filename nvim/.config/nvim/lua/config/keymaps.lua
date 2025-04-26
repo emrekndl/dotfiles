@@ -3,7 +3,7 @@
 --
 
 -- execute the current buffer
-vim.keymap.set("n", "<leader>xf", "<cmd>source %<CR>", { desc = "Source the current buffer" })
+-- vim.keymap.set("n", "<leader>xf", "<cmd>source %<CR>", { desc = "Source the current buffer" })
 -- vim.keymap.set("n", "<leader>lx", ":.lua<CR>", { desc = "Run the current line" })
 -- vim.keymap.set("v", "<leader>lx", ":lua<CR>", { desc = "Run the visual selected current lines" })
 
@@ -40,11 +40,11 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- clipboard register yank
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank line to clipboard" })
 
 -- delete void register
-vim.keymap.set({ "n", "v" }, "<leader>v", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>v", [["_d]], { desc = "Delete void resgister" })
 
 -- tmux new sessinozer for new project
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/bin/tmux-sessionizer<CR>")
@@ -56,13 +56,14 @@ vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz")
 
 -- substitute shortcut
-vim.keymap.set("n", "<leader>ra", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>ra", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "substitute" })
 
 -- chmod +x file
-vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>mx", "<cmd>!chmod +x %<CR>", { silent = true, desc = "chmod +x" })
 
 -- set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = false
+-- vim.keymap.set("n", "", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- diagnostic keymaps
@@ -72,8 +73,8 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagn
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- tabs page keymaps
-vim.keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new [T]ab" })
-vim.keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close [T]ab" })
+-- vim.keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new [T]ab" })
+-- vim.keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close [T]ab" })
 -- tab index with LualineBuffersJump! index
 vim.keymap.set("n", "gj", function()
 	local index = vim.fn.getcharstr()
@@ -109,4 +110,4 @@ vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 --
 --
 -- undotree
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree" })

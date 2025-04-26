@@ -16,7 +16,7 @@ return {
 		"Gedit",
 	},
 	ft = { "fugitive" },
-	init = function()
-		vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-	end,
+	-- init = function()
+	-- 	vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+	-- end,
 }

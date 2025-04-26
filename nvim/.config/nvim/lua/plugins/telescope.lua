@@ -78,6 +78,18 @@ return {
 				builtin.find_files({
 					-- frecency = true,
 					hidden = true,
+					file_ignore_patterns = {
+						".git/",
+						".cache",
+						"%.o",
+						"%.a",
+						"%.out",
+						"%.class",
+						"%.pdf",
+						"%.mkv",
+						"%.mp4",
+						"%.zip",
+					},
 				})
 			end, { desc = "[S]earch [F]iles" })
 			vim.keymap.set("n", "<leader>st", function()

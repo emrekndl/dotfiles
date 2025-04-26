@@ -213,3 +213,10 @@ setxkbmap -option "caps:escape_shifted_capslock"
 
 # uv python download
 UV_PYTHON_DOWNLOADS=never
+
+# markdown alias or func
+# alias mp='pandoc $1 > /tmp/$1.html && xdg-open /tmp/$1.html'
+function mp() {
+  pandoc $1 > /tmp/$1.html
+  xdg-open /tmp/$1.html
+}
