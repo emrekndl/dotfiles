@@ -1,0 +1,61 @@
+# Arch Linux
+- BTRFS
+- UEFI
+- Grub
+- grub-btrfs
+- Gnome / AwesomeWM
+- timesheet
+
+# cli apps
+curl
+git
+zsh
+oh-my-zsh
+powerlevel10k
+tmux
+nvim
+paru
+npm
+uv
+ripgrep
+fzf
+tldr
+podman
+ffmpeg
+jq
+yt-dlp
+alsamixer
+httpie
+z
+paralell
+imagemagick
+yazi
+
+# gui apps
+ghosstty
+zen-browser
+dbeaver
+vlc
+spotube
+xdm
+libreoffice
+conky
+variety
+rofi
+noiseTorch
+zapret
+gparted
+vscode
+
+
+# gnome extensions
+space bar
+screen word translate
+window title is back
+clipboard history
+justperfection
+gsconnect
+caffeine
+status icon
+
+
