@@ -37,6 +37,26 @@ return { -- Collection of various small independent plugins/modules
 		-- Jump extented, f,F,t,T
 		require("mini.jump").setup()
 
+		-- mini file explorer
+		require("mini.files").setup({
+			-- mapping = {
+			-- 	go_in = "<CR>",
+			-- 	go_in_plus = "L",
+			-- 	go_out = "-",
+			-- 	go_out_plus = "H",
+			-- },
+		})
+
+		vim.keymap.set(
+			"n",
+			"<leader>te",
+			"<cmd>lua require('mini.files').open()<CR>",
+			{ desc = "Toggle Mini File Explorer" }
+		)
+		vim.keymap.set("n", "<leader>tf", function()
+			require("mini.files").open(vim.api.nvim_buf_get_name(0), false)
+			require("mini.files").reveal_cwd()
+		end, { desc = "Toggle into currently opened file" })
 
 		-- Clue, show keybindings
 		-- local miniclue = require("mini.clue")
