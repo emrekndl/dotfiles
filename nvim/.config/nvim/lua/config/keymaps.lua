@@ -36,6 +36,10 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+-- visual select move
+vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })
+vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
+
 -- highlight copy and highlight pasting values not save in buffer (multiple highlights pasting first copying value)
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
@@ -111,3 +115,10 @@ vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 --
 -- undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree" })
+
+-- copy file path with ~ (home directory)
+vim.keymap.set("n", "<leader>mp", function()
+	local path = vim.fn.expand("%:~")
+	vim.fn.setreg("+", path)
+	vim.notify("File path copied to clipboard: " .. path, vim.log.levels.INFO)
+end, { desc = "Copy file path" })
