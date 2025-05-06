@@ -37,6 +37,18 @@ return { -- Collection of various small independent plugins/modules
 		-- Jump extented, f,F,t,T
 		require("mini.jump").setup()
 
+		-- Split-Join
+		require("mini.splitjoin").setup({
+			mappings = { toggle = "" },
+		})
+		vim.keymap.set(
+			{ "n", "x" },
+			"ıs",
+			"<cmd>lua require('mini.splitjoin').split()<CR>",
+			{ desc = "Split argumets" }
+		)
+		vim.keymap.set({ "n", "x" }, "ıj", "<cmd>lua require('mini.splitjoin').join()<CR>", { desc = "Join argumets" })
+
 		-- mini file explorer
 		require("mini.files").setup({
 			-- mapping = {
