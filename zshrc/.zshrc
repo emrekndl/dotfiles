@@ -160,8 +160,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
-# navi interactive cheatsheet
-eval "$(navi widget zsh)"
 
 # To add support for TTYs this line can be optionally added.
 #source ~/.cache/wal/colors-tty.sh
