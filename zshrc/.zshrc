@@ -1,3 +1,7 @@
+pfetch
+#initialize Z (https://github.com/rupa/z) 
+. ~/z.sh 
+#
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -16,8 +20,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="gruvbox"
-SOLARIZED_THEME="dark"
+# ZSH_THEME="gruvbox"
+# SOLARIZED_THEME="dark"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -89,7 +93,7 @@ plugins=(
 	themes
 	virtualenv
     z
-    celery
+    # celery
     colored-man-pages
     command-not-found
     zsh-autosuggestions
@@ -120,35 +124,15 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-pfetch
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# -- START ACTIVESTATE INSTALLATION
-export PATH="~/.local/ActiveState/StateTool/release:$PATH"
-# -- STOP ACTIVESTATE INSTALLATION
-# -- START ACTIVESTATE DEFAULT RUNTIME ENVIRONMENT
-export PATH="~/.cache/activestate/bin:$PATH"
-# -- STOP ACTIVESTATE DEFAULT RUNTIME ENVIRONMENT
-#
+
 export JAVA_HOME='/usr/lib/jvm/java-21-openjdk'
 # export JAVA_HOME='/usr/lib/jvm/java-8-openjdk'
 export PATH=$JAVA_HOME/bin:$PATH 
 # export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.xml.bind'
-
-export ANDROID_SDK_ROOT='/opt/android-sdk'
-export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools/
-# export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin/
-export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/
-# export PATH=$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/tools:$PATH
-export PATH=$PATH:$ANDROID_ROOT/emulator
-export PATH=$PATH:$ANDROID_SDK_ROOT/tools/
-
-alias emulator='$ANDROID_SDK_ROOT/emulator/emulator'
 
 
 export CHROME_EXECUTABLE='/usr/bin/chromium'
@@ -161,15 +145,8 @@ SAVEHIST=10000
 setopt appendhistory
 
 
-# To add support for TTYs this line can be optionally added.
-#source ~/.cache/wal/colors-tty.sh
-# Import colorscheme from 'wal -r '
 # ALIAS
 alias vim=nvim
-# pyenv
-# export PYENV_ROOT="$HOME/.pyenv"
-# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init -)"
 
 # go
 export GOPATH=$HOME/go
@@ -181,14 +158,9 @@ export PATH=$HOME/.config/rofi/scripts:$PATH
 # rust cargo
 export PATH="$HOME/.cargo/bin:$PATH"
 
-
 # Created by `pipx` on 2024-09-26 16:32:23
 export PATH="$PATH:/home/emre/.local/bin"
 eval "$(register-python-argcomplete pipx)"
-
-# poetry
-fpath+=~/.zfunc
-autoload -Uz compinit && compinit
 
 PATH="/home/emre/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/emre/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
@@ -202,13 +174,6 @@ export NVIM_TUI_ENABLE_TRUE_COLOR=1
 # capslock remap to escape
 setxkbmap -option "caps:escape_shifted_capslock"
 
-
-#initialize Z (https://github.com/rupa/z) 
-. ~/z.sh 
-
-# export PATH="/home/emre/.pyenv/versions/3.11.0/bin:$PATH"
-#
-
 # uv python download
 UV_PYTHON_DOWNLOADS=never
 
@@ -218,3 +183,6 @@ function mp() {
   pandoc $1 > /tmp/$1.html
   xdg-open /tmp/$1.html
 }
+
+# tmux-sessionizer
+bindkey -s '^F' "tmux-sessionizer\n"
