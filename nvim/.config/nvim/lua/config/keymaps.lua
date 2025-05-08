@@ -66,7 +66,7 @@ vim.keymap.set("n", "<leader>ra", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left>
 vim.keymap.set("n", "<leader>mx", "<cmd>!chmod +x %<CR>", { silent = true, desc = "chmod +x" })
 
 -- set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 -- vim.keymap.set("n", "", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 

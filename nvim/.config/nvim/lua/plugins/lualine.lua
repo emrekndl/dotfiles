@@ -5,8 +5,6 @@ return {
 		opts = {
 			theme = "poimandres",
 			icons_enabled = true,
-			-- component_separators = { left = "", right = "" },
-			-- section_separators = { left = "", right = "" },
 			-- color palette
 			-- yellow1 = '#FFFAC2',
 			-- yellow2 = '#FFE31A',
@@ -45,8 +43,24 @@ return {
 			-- background3 = '#171922',
 			-- text = '#E4F0FB',
 			-- white = '#FFFFFF',
-			-- section_separators = { left = "", right = "" },
-			-- component_separators = { left = "", right = "" },
+			--
+			-- "" "" "" "" "█" "█" "░▒▓" "▓▒░"
+			options = {
+
+				-- component_separators = { left = "", right = "" },
+				-- section_separators = { left = "", right = "" },
+				-- section_separators = { left = "", right = "" },
+				-- component_separators = { left = "", right = "" },
+				refresh = { statusline = 1000 },
+				ignore_focus = {
+					"DressingInput",
+					"DressingSelect",
+					"ccc-ui",
+				},
+				globalstatus = true,
+				component_separators = { left = "|", right = "|" },
+				section_separators = { left = "", right = "" },
+			},
 			disabled_filetypes = {
 				statusline = {},
 				winbar = {},
@@ -83,7 +97,6 @@ return {
 					{ "encoding", show_bomb = false, color = { fg = "#42675A" } },
 					{ "filetype", colored = true, icons_only = false, color = { gui = "bold" } },
 					{ "fileformat" },
-					{ "serchcount", color = { fg = "#5FB3A1" } },
 				},
 				lualine_y = { { "filesize", color = { fg = "#79BD8F" } }, "progress" },
 				lualine_z = { "location" },
@@ -99,7 +112,8 @@ return {
 			tabline = {
 				lualine_a = {
 					{
-						"buffers",
+						"windows",
+						-- "buffers",
 						show_filename_only = true,
 						hide_filename_extension = false,
 						show_modified_status = true,
@@ -122,6 +136,7 @@ return {
 							oil = "Oil File Explorer",
 						},
 
+						disable_buftype = { "quickfix", "prompt" },
 						use_mode_colors = false,
 
 						-- buffers_color = {
@@ -131,9 +146,10 @@ return {
 						-- },
 
 						symbols = {
-							modified = " ●",
+							modified = "●",
 							alternate_file = "#",
 							directory = "",
+							readonly = " 󰌾 ",
 						},
 					},
 				},
@@ -141,7 +157,7 @@ return {
 				lualine_c = {},
 				lualine_x = {},
 				lualine_y = {},
-				lualine_z = {},
+				lualine_z = { "searchcount" },
 			},
 			winbar = {
 				lualine_a = {},

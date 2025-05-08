@@ -1,3 +1,4 @@
+# theme = "Solarized Dark - Patched"
 theme = "/home/emre/.config/ghostty/nordic"
 # theme = "/home/emre/.config/ghostty/kanso-zen"
 # theme = "/home/emre/.config/ghostty/kanzo-ink"
@@ -16,9 +17,10 @@ cursor-style-blink = true
 
 shell-integration = zsh
 
-background-opacity = 0.8
-# background-opacity = 1.0
-background-blur-radius = true
+background-opacity = 0.9
+background-blur-radius = 20
+background = #031219
+# background-opacity = 0.8
 window-decoration = false
 
 confirm-close-surface = false
