@@ -21,10 +21,35 @@ hydrate() {
     fi
 }
 
+dirs_and_sessions() {
+# Aktif session’ların kök dizinleri
+mapfile -t session_dirs < <(
+  tmux list-sessions -F "#{session_name}" 2>/dev/null | while read -r s; do
+    tmux display-message -p -t "${s}:0" "#{pane_current_path}"
+  done | sort -u
+)
+
+# find ile aranacak dizinler
+mapfile -t all_dirs < <(
+  fd . --max-depth 2 --type d --hidden --follow --color=always \
+       ~ ~/dev ~/.config ~/dotfiles 2>/dev/null
+  # find ~/ ~/dev ~/.config ~/dotfiles \
+  #   -mindepth 1 -maxdepth 2 -type d 2>/dev/null
+)
+}
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/ ~/dev ~/.config ~/dotfiles -mindepth 1 -maxdepth 2 -type d | fzf)
+    # Önce session’lı dizinler, sonra geri kalanlar
+    dirs_and_sessions
+    selected=$(
+        {
+            printf '%s\n' "${session_dirs[@]}"
+            printf '%s\n' "${all_dirs[@]}" | grep -xFv -f <(printf '%s\n' "${session_dirs[@]}")
+        } | fzf --ansi
+    )
+    # selected=$(find ~/ ~/dev ~/.config ~/dotfiles -mindepth 1 -maxdepth 2 -type d | fzf)
 fi
 
 if [[ -z $selected ]]; then
@@ -35,9 +60,9 @@ selected_name=$(basename "$selected" | tr .: _)
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
+    tmux new-session -ds $selected_name -c $selected
     hydrate $selected_name $selected
-    exit 0
+    # exit 0
 fi
 
 if ! has_session $selected_name; then
@@ -47,32 +72,3 @@ fi
 
 switch_to $selected_name
 
-# if [[ $# -eq 1 ]]; then
-#     selected=$1
-# else
-#     selected=$(find ~/dev/ ~/dotfiles ~/.config ~/ -mindepth 1 -maxdepth 2 -type d | fzf)
-# fi
-#
-# if [[ -z $selected ]]; then
-#     exit 0
-# fi
-#
-# selected_name=$(basename "$selected" | tr . _)
-# tmux_running=$(pgrep tmux)
-#
-# if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-#     tmux new-session -s $selected_name -c $selected
-#     # tmux new-session -s $selected_name -c $selected "nvim ."
-#     exit 0
-# fi
-#
-# if ! tmux has-session -t=$selected_name 2> /dev/null; then
-#     tmux new-session -ds $selected_name -c $selected
-#     # tmux new-session -ds $selected_name -c $selected "nvim ."
-# fi
-#
-# if [[ -z $TMUX ]]; then
-#     tmux attach -t $selected_name
-# else
-#     tmux switch-client -t $selected_name
-# fi
