@@ -10,7 +10,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -129,13 +129,13 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export JAVA_HOME='/usr/lib/jvm/java-21-openjdk'
+# export JAVA_HOME='/usr/lib/jvm/java-21-openjdk'
 # export JAVA_HOME='/usr/lib/jvm/java-8-openjdk'
-export PATH=$JAVA_HOME/bin:$PATH 
+# export PATH=$JAVA_HOME/bin:$PATH 
 # export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.xml.bind'
 
 
-export CHROME_EXECUTABLE='/usr/bin/chromium'
+# export CHROME_EXECUTABLE='/usr/bin/chromium'
 # set up fzf key binding...
 source <(fzf --zsh)
 
@@ -148,25 +148,25 @@ setopt appendhistory
 # ALIAS
 alias vim=nvim
 
-# go
-export GOPATH=$HOME/go
-export GOROOT=/usr/lib/go
-PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+# # go
+# export GOPATH=$HOME/go
+# export GOROOT=/usr/lib/go
+# PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # rofi
-export PATH=$HOME/.config/rofi/scripts:$PATH
+# export PATH=$HOME/.config/rofi/scripts:$PATH
 # rust cargo
-export PATH="$HOME/.cargo/bin:$PATH"
+# export PATH="$HOME/.cargo/bin:$PATH"
 
 # Created by `pipx` on 2024-09-26 16:32:23
-export PATH="$PATH:/home/emre/.local/bin"
-eval "$(register-python-argcomplete pipx)"
+# export PATH="$PATH:/home/emre/.local/bin"
+# eval "$(register-python-argcomplete pipx)"
 
-PATH="/home/emre/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/emre/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/emre/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/emre/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/emre/perl5"; export PERL_MM_OPT;
+# PATH="/home/emre/perl5/bin${PATH:+:${PATH}}"; export PATH;
+# PERL5LIB="/home/emre/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+# PERL_LOCAL_LIB_ROOT="/home/emre/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+# PERL_MB_OPT="--install_base \"/home/emre/perl5\""; export PERL_MB_OPT;
+# PERL_MM_OPT="INSTALL_BASE=/home/emre/perl5"; export PERL_MM_OPT;
 
 # true color
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
