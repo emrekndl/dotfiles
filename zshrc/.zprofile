@@ -15,13 +15,13 @@ export GOPATH=$HOME/go
 export GOROOT=/usr/lib/go
 PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
-export CHROME_EXECUTABLE='/usr/bin/chromium'
 
 # java
 export JAVA_HOME='/usr/lib/jvm/java-21-openjdk'
 export PATH=$JAVA_HOME/bin:$PATH 
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 
 # Created by `pipx` on 2024-09-26 16:32:23
 export PATH="$PATH:/home/emre/.local/bin"
