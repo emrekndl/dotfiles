@@ -14,7 +14,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export GOPATH=$HOME/go
 export GOROOT=/usr/lib/go
 PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
+export PATH=$HOME/.local/bin:$PATH
 
 # java
 export JAVA_HOME='/usr/lib/jvm/java-21-openjdk'
