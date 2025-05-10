@@ -1,15 +1,22 @@
-# # ~/.tmux-sessionizer
+# # Create a ~/.tmux-sessionizer file
 #
-#  bir pencere, içinde vim
-# new-window -n edit "vim ."
+# new-window -n edit "nvim ."
 #
-#  ikinci pencere, içinde server
 # new-window -n server "podman-compose up --build" 
 #
-#  uygulamayı çalıştırmak için split
 # split-window -v -p 30 "python main.py"
 #
-# # son olarak default pencereye dön
 # select-window -t edit
+#
+# tmux new-window -n (term,edit,run,logs,db,test)
+#
+# tmux rename-window -t "0" "edit"
+# tmux -c "nvim ."
+#
+# tmux new-window -dn term
+# tmux new-window -dn edit
+# tmux select-window -t edit
 
-
+tmux new-window -dn term
+vim .
+clear
