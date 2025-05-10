@@ -2,7 +2,13 @@
 # Arch Linux GNOME Development Environment Setup Script
 # Kullanıma başlamadan önce bu dosyayı okumayı unutmayın!
 #
-# NOTE: cli and gui apps will be check for true installation!!!(package names, dependecies, repos, etc.) 
+#  TODO: cli and gui apps will be check for true installation!!!(package names, dependecies, repos, etc.) 
+# Example
+# #!/usr/bin/env bash
+# sudo pacman -S zsh
+# hash -r
+# sudo chsh -s $(which zsh)
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 #
 # Katı Bash Seçenekleri: Hata yakalama ve güvenli script davranışı için
 set -euo pipefail  # -e: hata durumunda çık, -u: tanımsız değişken hata, -o pipefail: pipe hatalarını algıla

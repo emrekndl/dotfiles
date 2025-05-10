@@ -72,3 +72,26 @@ fi
 
 switch_to $selected_name
 
+
+# # Create a ~/.tmux-sessionizer file
+#
+# new-window -n edit "nvim ."
+#
+# new-window -n server "podman-compose up --build" 
+#
+# split-window -v -p 30 "python main.py"
+#
+# select-window -t edit
+#
+# tmux new-window -n (term,edit,run,logs,db,test)
+#
+# tmux rename-window -t "0" "edit"
+# tmux -c "nvim ."
+#
+# tmux new-window -dn term
+# tmux new-window -dn edit
+# tmux select-window -t edit
+
+# tmux new-window -dn term
+# vim .
+# clear

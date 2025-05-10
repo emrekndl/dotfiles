@@ -25,6 +25,9 @@ ffmpeg
 jq
 yt-dlp
 alsamixer
+xclip
+fd
+bat
 httpie
 z
 paralell
