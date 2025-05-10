@@ -115,10 +115,11 @@ return {
 						"windows",
 						-- "buffers",
 						show_filename_only = true,
-						hide_filename_extension = false,
+						-- hide_filename_extension = false,
 						show_modified_status = true,
 
-						mode = 2,
+						mode = 0,
+						-- mode = 2,
 						-- 0: Shows buffer name
 						-- 1: Shows buffer index
 						-- 2: Shows buffer name + buffer index
