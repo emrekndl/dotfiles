@@ -32,7 +32,6 @@ httpie
 z
 paralell
 imagemagick
-yazi
 
 # gui apps
 ghosstty
@@ -53,6 +52,7 @@ vscode
 
 # gnome extensions
 space bar
+pop-shell
 screen word translate
 window title is back
 clipboard history
