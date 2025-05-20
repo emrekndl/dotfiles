@@ -19,12 +19,30 @@ return {
 			},
 		},
 		config = function()
+			local actions = require("telescope.actions")
+
+			-- Opens marked items in a quickfix list.
+			-- if there are no marked items, it opens all items in a quickfix list.
+			-- Or Alt-q
+			local smart_send_to_qflist = function(prompt_bufnr)
+				local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+				local multi = picker:get_multi_selection()
+
+				if not vim.tbl_isempty(multi) then
+					actions.send_selected_to_qflist(prompt_bufnr)
+				else
+					actions.send_to_qflist(prompt_bufnr)
+				end
+				actions.open_qflist(prompt_bufnr)
+			end
 			require("telescope").setup({
 				defaults = {
 					mappings = {
 						n = {
+							["<C-q>"] = smart_send_to_qflist,
 							["d"] = require("telescope.actions").delete_buffer,
 						},
+						i = { ["<C-q>"] = smart_send_to_qflist },
 					},
 				},
 				pickers = {
