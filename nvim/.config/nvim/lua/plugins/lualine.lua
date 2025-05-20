@@ -157,7 +157,7 @@ return {
 				lualine_b = {},
 				lualine_c = {},
 				lualine_x = {},
-				lualine_y = {},
+				lualine_y = { "selectioncount" },
 				lualine_z = { "searchcount" },
 			},
 			winbar = {

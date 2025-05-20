@@ -188,5 +188,5 @@ function mp() {
 # tmux-sessionizer
 bindkey -s '^F' "tmux-sessionizer\n"
 # tmux-cht.sh
-# bindkey -s '^I' "tmux-cht.sh\n"
-bindkey -s '^[[105;5u' "tmux-cht.sh\n"
+bindkey -s '^I' "tmux-cht.sh\n"
+# bindkey -s '^[[105;5u' "tmux-cht.sh\n"
