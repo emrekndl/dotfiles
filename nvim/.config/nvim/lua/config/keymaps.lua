@@ -71,11 +71,16 @@ vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+vim.keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Go to previous [D]iagnostic message" })
+vim.keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Go to next [D]iagnostic message" })
+-- vim.keymap.set("n", "[d", vim.diagnostic.get_prev, { desc = "Go to previous [D]iagnostic message" })
+-- vim.keymap.set("n", "]d", vim.diagnostic.get_next, { desc = "Go to next [D]iagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-
 -- tabs page keymaps
 -- vim.keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new [T]ab" })
 -- vim.keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close [T]ab" })
@@ -122,3 +127,11 @@ vim.keymap.set("n", "<leader>mp", function()
 	vim.fn.setreg("+", path)
 	vim.notify("File path copied to clipboard: " .. path, vim.log.levels.INFO)
 end, { desc = "Copy file path" })
+
+-- Alt + hjkl
+vim.cmd([[
+  cnoremap <M-h> <Left>
+  cnoremap <M-j> <Down>
+  cnoremap <M-k> <Up>
+  cnoremap <M-l> <Right>
+]])
