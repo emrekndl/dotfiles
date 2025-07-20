@@ -195,17 +195,6 @@ return {
 				-- 		},
 				-- 	},
 				-- },
-				-- tailwindcss = {
-				-- 	cmd = { "tailwindcss-language-server", "--stdio" },
-				-- 	filetypes = {
-				-- 	},
-				-- 	settings = {
-				-- 		tailwindCSS = {
-				-- 			classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
-				-- 			validate = true,
-				-- 		},
-				-- 	},
-				-- },
 				gopls = {
 					settings = {
 						gopls = {
@@ -244,52 +233,47 @@ return {
 						pylsp = {
 							executable = "pylsp",
 							plugins = {
-								rope_autoimport = {
-									enabled = false,
-									-- extra_paths = { venv_site_packages },
-								},
 								ruff = {
 									enabled = true, -- Enable the plugin
 									formatEnabled = true, -- Enable formatting using ruffs formatter
 									executable = "ruff",
 									extendSelect = { "I" }, -- Rules that are additionally used by ruff
-									extendIgnore = { "C90" }, -- Rules that are additionally ignored by ruff
+									-- extendIgnore = { "C90" }, -- Rules that are additionally ignored by ruff
 									format = { "I" }, -- Rules that are marked as fixable by ruff that should be fixed when running textDocument/formatting
-									severities = { ["D212"] = "I" }, -- Optional table of rules where a custom severity is desired
+									-- severities = { ["D212"] = "I" }, -- Optional table of rules where a custom severity is desired
 									unsafeFixes = false, -- Whether or not to offer unsafe fixes as code actions. Ignored with the "Fix All" action
 
 									lineLength = 88, -- Line length to pass to ruff checking and formatting
 									exclude = { "__about__.py" }, -- Files to be excluded by ruff checking
-									select = { "F" }, -- Rules to be enabled by ruff
-									ignore = { "D210" }, -- Rules to be ignored by ruff
+									-- select = { "F" }, -- Rules to be enabled by ruff
+									-- ignore = { "D210" }, -- Rules to be ignored by ruff
 									perFileIgnores = { ["__init__.py"] = "CPY001" }, -- Rules that should be ignored for specific files
-									preview = false, -- Whether to enable the preview style linting and formatting.
-									targetVersion = "py310",
+									-- preview = false, -- Whether to enable the preview style linting and formatting.
+									-- targetVersion = "py310",
 								},
-								pyflakes = {
+								-- Disable all linting plugins
+								pyflakes = { enabled = false },
+								pycodestyle = { enabled = false },
+								autopep8 = { enabled = false },
+								yapf = { enabled = false },
+								mccabe = { enabled = false },
+								pylsp_mypy = { enabled = false },
+								pylsp_black = { enabled = false },
+								pylsp_isort = { enabled = false },
+								pylint = { enabled = false },
+								flake8 = { enabled = false },
+								pydocstyle = { enabled = false },
+								rope_autoimport = {
 									enabled = false,
 								},
-								pycodestyle = {
-									enabled = false,
-								},
-								autopep8 = {
-									enabled = false,
-								},
-								yapf = {
-									enabled = false,
-								},
-								mccabe = {
-									enabled = false,
-								},
-								pylsp_black = {
-									enabled = false,
-								},
-								pylsp_mypy = {
-									enabled = false,
-								},
-								pylsp_isort = {
-									enabled = false,
-								},
+								-- Keep navigation-related plugins enabled
+								rope_completion = { enabled = true },
+								jedi_completion = { enabled = true },
+								jedi_definition = { enabled = true },
+								jedi_hover = { enabled = true },
+								jedi_references = { enabled = true },
+								jedi_signature_help = { enabled = true },
+								jedi_symbols = { enabled = true },
 							},
 						},
 					},

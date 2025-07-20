@@ -135,3 +135,4 @@ vim.cmd([[
   cnoremap <M-k> <Up>
   cnoremap <M-l> <Right>
 ]])
+

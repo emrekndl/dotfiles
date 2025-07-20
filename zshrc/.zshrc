@@ -91,6 +91,7 @@ plugins=(
     colored-man-pages
     zsh-syntax-highlighting
 	python
+    golang
 	themes
 	virtualenv
     z
@@ -99,6 +100,7 @@ plugins=(
     command-not-found
     zsh-autosuggestions
     you-should-use
+    # zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -150,9 +152,9 @@ setopt appendhistory
 alias vim=nvim
 
 # # go
-# export GOPATH=$HOME/go
-# export GOROOT=/usr/lib/go
-# PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GOPATH=$HOME/go
+export GOROOT=/usr/lib/go
+PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # rofi
 # export PATH=$HOME/.config/rofi/scripts:$PATH
@@ -191,78 +193,78 @@ bindkey -s '^F' "tmux-sessionizer\n"
 # bindkey -s '^I' "tmux-cht.sh\n"
 # bindkey -s '^[[105;5u' "tmux-cht.sh\n"
 #
-# vi mode
-bindkey -v
-
-# vi mode for mode switch time
-export KEYTIMEOUT=1
-
-# edit line in vim with ctrl-e
-autoload edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line
-
-# vim keys on tab complete menu
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-
-# backward delete char
-bindkey "^?" backward-delete-char
-
-# Change cursor shape for different vi modes.
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-  fi
-}
-zle -N zle-keymap-select
-
-# ci", ci', ci`, di", etc
-autoload -U select-quoted
-zle -N select-quoted
-for m in visual viopp; do
-  for c in {a,i}{\',\",\`}; do
-    bindkey -M $m $c select-quoted
-  done
-done
-
-# ci{, ci(, ci<, di{, etc
-autoload -U select-bracketed
-zle -N select-bracketed
-for m in visual viopp; do
-  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
-    bindkey -M $m $c select-bracketed
-  done
-done
-
-zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-    echo -ne "\e[5 q"
-}
-zle -N zle-line-init
-
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
-precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
-
-# Control bindings for programs
-bindkey -s "^g" "lc\n"
-bindkey -s "^h" "history 1\n"
-bindkey -s "^l" "clear\n"
-
-# tmux-sessionizer for zle widget
-tmux_sessionizer(){
-    BUFFER="tmux-sessionizer"
-    zle accept-line
-}
-zle -N tmux-sessionizer-widget tmux_sessionizer
-
-# insert mode and command mode tmux-sessionizer
-bindkey -M viins '^F' tmux-sessionizer-widget
-bindkey -M vicmd '^F' tmux-sessionizer-widget
+# VI MODE
+# bindkey -v
+#
+# # vi mode for mode switch time
+# export KEYTIMEOUT=1
+#
+# # edit line in vim with ctrl-e
+# autoload edit-command-line; zle -N edit-command-line
+# bindkey '^e' edit-command-line
+#
+# # vim keys on tab complete menu
+# bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'k' vi-up-line-or-history
+# bindkey -M menuselect 'l' vi-forward-char
+# bindkey -M menuselect 'j' vi-down-line-or-history
+#
+# # backward delete char
+# bindkey "^?" backward-delete-char
+#
+# # Change cursor shape for different vi modes.
+# function zle-keymap-select {
+#   if [[ ${KEYMAP} == vicmd ]] ||
+#      [[ $1 = 'block' ]]; then
+#     echo -ne '\e[1 q'
+#   elif [[ ${KEYMAP} == main ]] ||
+#        [[ ${KEYMAP} == viins ]] ||
+#        [[ ${KEYMAP} = '' ]] ||
+#        [[ $1 = 'beam' ]]; then
+#     echo -ne '\e[5 q'
+#   fi
+# }
+# zle -N zle-keymap-select
+#
+# # ci", ci', ci`, di", etc
+# autoload -U select-quoted
+# zle -N select-quoted
+# for m in visual viopp; do
+#   for c in {a,i}{\',\",\`}; do
+#     bindkey -M $m $c select-quoted
+#   done
+# done
+#
+# # ci{, ci(, ci<, di{, etc
+# autoload -U select-bracketed
+# zle -N select-bracketed
+# for m in visual viopp; do
+#   for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+#     bindkey -M $m $c select-bracketed
+#   done
+# done
+#
+# zle-line-init() {
+#     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+#     echo -ne "\e[5 q"
+# }
+# zle -N zle-line-init
+#
+# echo -ne '\e[5 q' # Use beam shape cursor on startup.
+# precmd() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+#
+# # Control bindings for programs
+# bindkey -s "^g" " lc\n"
+# bindkey -s "^h" " history 1\n"
+# bindkey -s "^l" " clear\n"
+#
+# # tmux-sessionizer for zle widget
+# tmux_sessionizer(){
+#     BUFFER="tmux-sessionizer"
+#     zle accept-line
+# }
+# zle -N tmux-sessionizer-widget tmux_sessionizer
+#
+# # insert mode and command mode tmux-sessionizer
+# bindkey -M viins '^F' tmux-sessionizer-widget
+# bindkey -M vicmd '^F' tmux-sessionizer-widget
